@@ -86,13 +86,13 @@ namespace react = facebook::react;
 
   _iconType = RNSTabsIconTypeSfSymbol;
 
-  _iconImageRenderingMode = RNSTabsIconImageRenderingModeDefault;
-  _iconSymbolRenderingMode = RNSTabsIconSymbolRenderingModeDefault;
+  _iconImageRenderingMode = RNSIconImageRenderingModeDefault;
+  _iconSymbolRenderingMode = RNSIconSymbolRenderingModeDefault;
   _iconImageSource = nil;
   _iconResourceName = nil;
 
-  _selectedIconImageRenderingMode = RNSTabsIconImageRenderingModeDefault;
-  _selectedIconSymbolRenderingMode = RNSTabsIconSymbolRenderingModeDefault;
+  _selectedIconImageRenderingMode = RNSIconImageRenderingModeDefault;
+  _selectedIconSymbolRenderingMode = RNSIconSymbolRenderingModeDefault;
   _selectedIconImageSource = nil;
   _selectedIconResourceName = nil;
 
@@ -260,27 +260,27 @@ RNS_IGNORE_SUPER_CALL_END
   }
 
   if (newComponentProps.iconImageRenderingMode != oldComponentProps.iconImageRenderingMode) {
-    _iconImageRenderingMode = rnscreens::conversion::RNSTabsIconImageRenderingModeFromIconImageRenderingMode(
+    _iconImageRenderingMode = rnscreens::conversion::RNSIconImageRenderingModeFromIconImageRenderingMode(
         newComponentProps.iconImageRenderingMode);
     tabItemNeedsAppearanceUpdate = YES;
   }
 
   if (newComponentProps.iconSymbolRenderingMode != oldComponentProps.iconSymbolRenderingMode) {
-    _iconSymbolRenderingMode = rnscreens::conversion::RNSTabsIconSymbolRenderingModeFromIconSymbolRenderingMode(
+    _iconSymbolRenderingMode = rnscreens::conversion::RNSIconSymbolRenderingModeFromIconSymbolRenderingMode(
         newComponentProps.iconSymbolRenderingMode);
     tabItemNeedsAppearanceUpdate = YES;
   }
 
   if (newComponentProps.selectedIconImageRenderingMode != oldComponentProps.selectedIconImageRenderingMode) {
     _selectedIconImageRenderingMode =
-        rnscreens::conversion::RNSTabsIconImageRenderingModeFromSelectedIconImageRenderingMode(
+        rnscreens::conversion::RNSIconImageRenderingModeFromSelectedIconImageRenderingMode(
             newComponentProps.selectedIconImageRenderingMode);
     tabItemNeedsAppearanceUpdate = YES;
   }
 
   if (newComponentProps.selectedIconSymbolRenderingMode != oldComponentProps.selectedIconSymbolRenderingMode) {
     _selectedIconSymbolRenderingMode =
-        rnscreens::conversion::RNSTabsIconSymbolRenderingModeFromSelectedIconSymbolRenderingMode(
+        rnscreens::conversion::RNSIconSymbolRenderingModeFromSelectedIconSymbolRenderingMode(
             newComponentProps.selectedIconSymbolRenderingMode);
     tabItemNeedsAppearanceUpdate = YES;
   }

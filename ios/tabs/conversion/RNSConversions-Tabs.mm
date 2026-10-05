@@ -189,59 +189,59 @@ RNSTabsIconType RNSTabsIconTypeFromIcon(react::RNSTabsScreenIOSIconType iconType
   }
 }
 
-RNSTabsIconImageRenderingMode RNSTabsIconImageRenderingModeFromIconImageRenderingMode(
+RNSIconImageRenderingMode RNSIconImageRenderingModeFromIconImageRenderingMode(
     react::RNSTabsScreenIOSIconImageRenderingMode renderingMode)
 {
   using enum facebook::react::RNSTabsScreenIOSIconImageRenderingMode;
   switch (renderingMode) {
     case Default:
-      return RNSTabsIconImageRenderingModeDefault;
+      return RNSIconImageRenderingModeDefault;
     case Template:
-      return RNSTabsIconImageRenderingModeTemplate;
+      return RNSIconImageRenderingModeTemplate;
     case Original:
-      return RNSTabsIconImageRenderingModeOriginal;
+      return RNSIconImageRenderingModeOriginal;
   }
 }
 
-RNSTabsIconImageRenderingMode RNSTabsIconImageRenderingModeFromSelectedIconImageRenderingMode(
+RNSIconImageRenderingMode RNSIconImageRenderingModeFromSelectedIconImageRenderingMode(
     react::RNSTabsScreenIOSSelectedIconImageRenderingMode renderingMode)
 {
   using enum facebook::react::RNSTabsScreenIOSSelectedIconImageRenderingMode;
   switch (renderingMode) {
     case Default:
-      return RNSTabsIconImageRenderingModeDefault;
+      return RNSIconImageRenderingModeDefault;
     case Template:
-      return RNSTabsIconImageRenderingModeTemplate;
+      return RNSIconImageRenderingModeTemplate;
     case Original:
-      return RNSTabsIconImageRenderingModeOriginal;
+      return RNSIconImageRenderingModeOriginal;
   }
 }
 
-RNSTabsIconSymbolRenderingMode RNSTabsIconSymbolRenderingModeFromIconSymbolRenderingMode(
+RNSIconSymbolRenderingMode RNSIconSymbolRenderingModeFromIconSymbolRenderingMode(
     react::RNSTabsScreenIOSIconSymbolRenderingMode renderingMode)
 {
   using enum facebook::react::RNSTabsScreenIOSIconSymbolRenderingMode;
   switch (renderingMode) {
     case Default:
-      return RNSTabsIconSymbolRenderingModeDefault;
+      return RNSIconSymbolRenderingModeDefault;
     case Monochrome:
-      return RNSTabsIconSymbolRenderingModeMonochrome;
+      return RNSIconSymbolRenderingModeMonochrome;
     case Original:
-      return RNSTabsIconSymbolRenderingModeOriginal;
+      return RNSIconSymbolRenderingModeOriginal;
   }
 }
 
-RNSTabsIconSymbolRenderingMode RNSTabsIconSymbolRenderingModeFromSelectedIconSymbolRenderingMode(
+RNSIconSymbolRenderingMode RNSIconSymbolRenderingModeFromSelectedIconSymbolRenderingMode(
     react::RNSTabsScreenIOSSelectedIconSymbolRenderingMode renderingMode)
 {
   using enum facebook::react::RNSTabsScreenIOSSelectedIconSymbolRenderingMode;
   switch (renderingMode) {
     case Default:
-      return RNSTabsIconSymbolRenderingModeDefault;
+      return RNSIconSymbolRenderingModeDefault;
     case Monochrome:
-      return RNSTabsIconSymbolRenderingModeMonochrome;
+      return RNSIconSymbolRenderingModeMonochrome;
     case Original:
-      return RNSTabsIconSymbolRenderingModeOriginal;
+      return RNSIconSymbolRenderingModeOriginal;
   }
 }
 
