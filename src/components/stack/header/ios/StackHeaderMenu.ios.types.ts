@@ -8,7 +8,7 @@
  *
  * @platform ios
  */
-import type { PlatformIconIOS } from '../../../shared/types';
+import type { StackHeaderIconIOS } from '../StackHeaderIcon.types';
 
 export interface StackHeaderMenuItemIOS {
   /**
@@ -69,12 +69,14 @@ export interface StackHeaderMenuItemIOS {
    * @summary Icon displayed for the menu item.
    *
    * @description
-   * Supports SF Symbols, xcassets, and image sources. For async image sources,
+   * Supports SF Symbols and image sources, each with an optional
+   * `renderingMode` (see `StackHeaderIconIOSSymbolRenderingMode` and
+   * `StackHeaderIconIOSImageRenderingMode`). For async image sources,
    * the menu item renders without an icon first and updates when loaded.
    *
    * @platform ios
    */
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
   /**
    * @summary Callback invoked when the menu item is pressed.
    *
@@ -165,12 +167,14 @@ export interface StackHeaderMenuIOS {
    * @summary Icon displayed for the submenu.
    *
    * @description
-   * Supports SF Symbols, xcassets, and image sources. For async image sources,
+   * Supports SF Symbols and image sources, each with an optional
+   * `renderingMode` (see `StackHeaderIconIOSSymbolRenderingMode` and
+   * `StackHeaderIconIOSImageRenderingMode`). For async image sources,
    * the menu renders without an icon first and updates when loaded.
    *
    * @platform ios
    */
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
   /**
    * @summary Displays the menu inline with parent menu instead of as a submenu.
    *

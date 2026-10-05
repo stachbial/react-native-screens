@@ -1,5 +1,5 @@
 import type { PlatformIconIOS as ResolvedPlatformIconIOS } from '../../../../fabric/stack/StackHeaderItemIOSNativeComponent';
-import type { PlatformIconIOS } from '../../../shared/types';
+import type { StackHeaderIconIOS } from '../StackHeaderIcon.types';
 import type {
   StackHeaderMenuIOS,
   StackHeaderMenuElementIOS,
@@ -7,7 +7,7 @@ import type {
 import { Image } from 'react-native';
 
 export function resolveIconAssetSources(
-  icon: PlatformIconIOS | undefined,
+  icon: StackHeaderIconIOS | undefined,
 ): ResolvedPlatformIconIOS | undefined {
   if (icon == null) {
     return undefined;
@@ -22,20 +22,7 @@ export function resolveIconAssetSources(
     return {
       type: 'imageSource',
       imageSource: resolvedImageSource,
-    };
-  }
-  if (icon.type === 'templateSource') {
-    const resolvedTemplateSource = Image.resolveAssetSource(
-      icon.templateSource,
-    );
-
-    if (!resolvedTemplateSource) {
-      return undefined;
-    }
-
-    return {
-      type: 'templateSource',
-      templateSource: resolvedTemplateSource,
+      renderingMode: icon.renderingMode,
     };
   }
   return icon;
