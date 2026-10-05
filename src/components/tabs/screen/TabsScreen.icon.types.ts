@@ -1,14 +1,10 @@
 import type {
   PlatformIconAndroid,
   PlatformIconAndroidTinting,
+  PlatformIconIOS,
   PlatformIconIOSImageRenderingMode,
-  PlatformIconIOSSfSymbol,
   PlatformIconIOSSymbolRenderingMode,
   PlatformIconIOSTemplate,
-  PlatformIconIOSXcasset,
-  PlatformIconShared,
-  WithImageRenderingMode,
-  WithSymbolRenderingMode,
 } from '../../shared/types';
 
 /**
@@ -61,10 +57,6 @@ export type TabsScreenIconAndroidTinting = PlatformIconAndroidTinting;
  */
 export type TabsScreenIconIOSTemplate = PlatformIconIOSTemplate;
 
-export type TabsScreenIconIOS =
-  | WithSymbolRenderingMode<PlatformIconIOSSfSymbol>
-  | PlatformIconIOSXcasset
-  | TabsScreenIconIOSTemplate
-  | WithImageRenderingMode<PlatformIconShared>;
+export type TabsScreenIconIOS = PlatformIconIOS;
 
 export type TabsScreenIconAndroid = PlatformIconAndroid;

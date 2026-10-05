@@ -1,6 +1,7 @@
 #import "RNSBarButtonItem.h"
 #import <React/RCTConvert.h>
 #import <React/RCTFont.h>
+#import "RNSConversions.h"
 #import "RNSDefines.h"
 #import "RNSImageLoadingHelper.h"
 
@@ -136,7 +137,10 @@ static UIMenuOptions RNSMakeUIMenuOptionsFromConfig(NSDictionary *config);
 {
   NSString *sfSymbolName = dict[@"sfSymbolName"];
   if (sfSymbolName != nil) {
-    completionBlock([UIImage systemImageNamed:sfSymbolName]);
+    UIImage *image = [RNSImageLoadingHelper symbolImageNamed:sfSymbolName];
+    completionBlock([RNSImageLoadingHelper image:image
+                         withSymbolRenderingMode:rnscreens::conversion::RNSIconSymbolRenderingModeFromString(
+                                                     dict[@"sfSymbolRenderingMode"])]);
     return;
   }
 

@@ -1,12 +1,11 @@
 import type {
   PlatformIconAndroid,
   PlatformIconAndroidTinting,
+  PlatformIconIOS,
   PlatformIconIOSImageRenderingMode,
-  PlatformIconIOSSfSymbol,
   PlatformIconIOSSymbolRenderingMode,
-  PlatformIconShared,
-  WithImageRenderingMode,
-  WithSymbolRenderingMode,
+  PlatformIconIOSTemplate,
+  PlatformIconIOSXcasset,
 } from '../../shared/types';
 
 /**
@@ -40,9 +39,10 @@ export type StackHeaderIconIOSImageRenderingMode =
 export type StackHeaderIconIOSSymbolRenderingMode =
   PlatformIconIOSSymbolRenderingMode;
 
-export type StackHeaderIconIOS =
-  | WithSymbolRenderingMode<PlatformIconIOSSfSymbol>
-  | WithImageRenderingMode<PlatformIconShared>;
+export type StackHeaderIconIOS = Exclude<
+  PlatformIconIOS,
+  PlatformIconIOSTemplate | PlatformIconIOSXcasset
+>;
 
 /**
  * How a header icon is tinted on Android.
