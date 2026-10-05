@@ -174,13 +174,16 @@ function parseBackButtonIconToNativeProps(
   icon: StackHeaderConfigPropsAndroid['backButtonIcon'],
 ): Pick<
   StackHeaderConfigAndroidNativeComponentProps,
-  'backButtonImageIconResource' | 'backButtonDrawableIconResourceName'
+  | 'backButtonImageIconResource'
+  | 'backButtonDrawableIconResourceName'
+  | 'backButtonIconTinting'
 > {
   const parsed = parseAndroidIconToNativeProps(icon);
 
   return {
     backButtonImageIconResource: parsed.imageIconResource,
     backButtonDrawableIconResourceName: parsed.drawableIconResourceName,
+    backButtonIconTinting: parsed.iconTinting,
   };
 }
 
@@ -188,13 +191,16 @@ function parseOverflowIconToNativeProps(
   icon: StackHeaderConfigPropsAndroid['overflowIcon'],
 ): Pick<
   StackHeaderConfigAndroidNativeComponentProps,
-  'overflowIconImageIconResource' | 'overflowIconDrawableIconResourceName'
+  | 'overflowIconImageIconResource'
+  | 'overflowIconDrawableIconResourceName'
+  | 'overflowIconTinting'
 > {
   const parsed = parseAndroidIconToNativeProps(icon);
 
   return {
     overflowIconImageIconResource: parsed.imageIconResource,
     overflowIconDrawableIconResourceName: parsed.drawableIconResourceName,
+    overflowIconTinting: parsed.iconTinting,
   };
 }
 
@@ -580,15 +586,21 @@ function parseToolbarMenuElementOptionsToNativeProps(
             if (iconValue === undefined) {
               const noIcon: Pick<
                 NativeToolbarMenuElementOptionsAndroid,
-                'imageIconResource' | 'drawableIconResourceName'
+                'imageIconResource' | 'drawableIconResourceName' | 'iconTinting'
               > = {
                 imageIconResource: null,
                 drawableIconResourceName: null,
+                iconTinting: null,
               };
               return Object.entries(noIcon);
             }
 
-            return Object.entries(parseAndroidIconToNativeProps(iconValue));
+            const { iconTinting, ...iconProps } =
+              parseAndroidIconToNativeProps(iconValue);
+            return Object.entries({
+              ...iconProps,
+              iconTinting: iconTinting ?? null,
+            });
           }
         }
 

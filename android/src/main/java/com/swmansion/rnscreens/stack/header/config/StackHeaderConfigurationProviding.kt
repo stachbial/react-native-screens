@@ -2,6 +2,7 @@ package com.swmansion.rnscreens.stack.header.config
 
 import android.graphics.drawable.Drawable
 import com.swmansion.rnscreens.common.text.TextAppearance
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.stack.header.subview.StackHeaderSubviewProviding
 import com.swmansion.rnscreens.stack.header.toolbar.StackHeaderToolbarMenuController
 
@@ -17,10 +18,12 @@ internal interface StackHeaderConfigurationProviding {
     val backButtonTintColorPressed: Int?
     val backButtonTintColorFocused: Int?
     val backButtonIcon: Drawable?
+    val backButtonIconTinting: IconTinting
     val overflowIconTintColorNormal: Int?
     val overflowIconTintColorPressed: Int?
     val overflowIconTintColorFocused: Int?
     val overflowIcon: Drawable?
+    val overflowIconTinting: IconTinting
     val scrollFlagScroll: Boolean
     val scrollFlagEnterAlways: Boolean
     val scrollFlagEnterAlwaysCollapsed: Boolean

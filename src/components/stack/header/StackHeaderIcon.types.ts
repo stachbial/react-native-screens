@@ -1,4 +1,6 @@
 import type {
+  PlatformIconAndroid,
+  PlatformIconAndroidTinting,
   PlatformIconIOSImageRenderingMode,
   PlatformIconIOSSfSymbol,
   PlatformIconIOSSymbolRenderingMode,
@@ -41,3 +43,19 @@ export type StackHeaderIconIOSSymbolRenderingMode =
 export type StackHeaderIconIOS =
   | WithSymbolRenderingMode<PlatformIconIOSSfSymbol>
   | WithImageRenderingMode<PlatformIconShared>;
+
+/**
+ * How a header icon is tinted on Android.
+ *
+ * - `default` - the header's default, also used when `tinting` is unset: the
+ *   icon is tinted with the tint colors configured for it (e.g.
+ *   `iconTintColorNormal`, `backButtonTintColorNormal`,
+ *   `overflowIconTintColorNormal`). Without a configured tint color it keeps
+ *   its own colors.
+ * - `tinted` - same as `default`.
+ * - `original` - the icon keeps its own colors and ignores the configured tint
+ *   colors, e.g. a multicolor VectorDrawable.
+ */
+export type StackHeaderIconAndroidTinting = PlatformIconAndroidTinting;
+
+export type StackHeaderIconAndroid = PlatformIconAndroid;

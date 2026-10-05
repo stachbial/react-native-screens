@@ -1,5 +1,7 @@
 package com.swmansion.rnscreens.stack.header.toolbar.model
 
+import com.swmansion.rnscreens.helpers.IconTinting
+
 /**
  * Defaults for toolbar menu item fields.
  *
@@ -19,6 +21,7 @@ internal object StackHeaderToolbarMenuItemDefaults {
     val ICON_TINT_COLOR_PRESSED: Int? = null
     val ICON_TINT_COLOR_FOCUSED: Int? = null
     val ICON_TINT_COLOR_DISABLED: Int? = null
+    val ICON_TINTING: IconTinting = IconTinting.DEFAULT
     val DRAWABLE_ICON_RESOURCE_NAME: String? = null
     val IMAGE_ICON_URI: String? = null
     val ITEM_TYPE: StackHeaderToolbarMenuItemType = StackHeaderToolbarMenuItemType.AUTOMATIC

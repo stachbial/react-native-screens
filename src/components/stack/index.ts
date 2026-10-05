@@ -22,6 +22,8 @@ export type {
   StackHeaderConfigProps,
   StackHeaderConfigRef,
   // Android
+  StackHeaderIconAndroid,
+  StackHeaderIconAndroidTinting,
   StackHeaderTypeAndroid,
   StackHeaderTitleHorizontalGravityAndroid,
   StackHeaderTitleVerticalGravityAndroid,

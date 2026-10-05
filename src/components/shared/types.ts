@@ -76,10 +76,13 @@ export type WithSymbolRenderingMode<Icon> = Icon & {
 
 export type WithTinting<Icon> = Icon & {
   /**
-   * @summary How the icon is tinted: `tinted` draws it in the container's icon
-   * color, `original` keeps the icon's own colors.
+   * @summary How the icon is tinted: `tinted` lets the container tint it (the
+   * tab bar with its item icon color, a header with the tint colors configured
+   * for the icon), `original` keeps the icon's own colors even when a tint
+   * color is set.
    *
-   * `default`, also used when unset, keeps the container's default.
+   * `default`, also used when unset, keeps the container's default: the tab
+   * bar tints the icon, a header tints it only when a tint color is configured.
    */
   tinting?: PlatformIconAndroidTinting | undefined;
 };
@@ -92,6 +95,16 @@ export type PlatformIconShared = {
 export type PlatformIconAndroidDrawableResource = {
   type: 'drawableResource';
   name: string;
+  /**
+   * @summary How the icon is tinted: `tinted` lets the container tint it (the
+   * tab bar with its item icon color, a header with the tint colors configured
+   * for the icon), `original` keeps the icon's own colors even when a tint
+   * color is set.
+   *
+   * `default`, also used when unset, keeps the container's default: the tab
+   * bar tints the icon, a header tints it only when a tint color is configured.
+   */
+  tinting?: PlatformIconAndroidTinting | undefined;
 };
 
 export type PlatformIconIOSTemplate = {
@@ -117,4 +130,4 @@ export type PlatformIconIOS =
 
 export type PlatformIconAndroid =
   | PlatformIconAndroidDrawableResource
-  | PlatformIconShared;
+  | WithTinting<PlatformIconShared>;

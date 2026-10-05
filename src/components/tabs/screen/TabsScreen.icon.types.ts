@@ -1,5 +1,5 @@
 import type {
-  PlatformIconAndroidDrawableResource,
+  PlatformIconAndroid,
   PlatformIconAndroidTinting,
   PlatformIconIOSImageRenderingMode,
   PlatformIconIOSSfSymbol,
@@ -9,7 +9,6 @@ import type {
   PlatformIconShared,
   WithImageRenderingMode,
   WithSymbolRenderingMode,
-  WithTinting,
 } from '../../shared/types';
 
 /**
@@ -68,6 +67,4 @@ export type TabsScreenIconIOS =
   | TabsScreenIconIOSTemplate
   | WithImageRenderingMode<PlatformIconShared>;
 
-export type TabsScreenIconAndroid =
-  | WithTinting<PlatformIconAndroidDrawableResource>
-  | WithTinting<PlatformIconShared>;
+export type TabsScreenIconAndroid = PlatformIconAndroid;

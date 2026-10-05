@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.MenuItemCompat
 import com.google.android.material.appbar.MaterialToolbar
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.stack.header.getResizedDrawable
 import com.swmansion.rnscreens.stack.header.toolbar.model.StackHeaderToolbarMenuConfig
 import com.swmansion.rnscreens.stack.header.toolbar.model.StackHeaderToolbarMenuElementConfig
@@ -159,6 +160,10 @@ internal object StackHeaderToolbarMenuApplicator {
     // region Icon tint
 
     private fun buildIconTintList(options: StackHeaderToolbarMenuElementOptions): ColorStateList? {
+        if (options.iconTinting == IconTinting.ORIGINAL) {
+            return null
+        }
+
         val states = mutableListOf<IntArray>()
         val colors = mutableListOf<Int>()
 
