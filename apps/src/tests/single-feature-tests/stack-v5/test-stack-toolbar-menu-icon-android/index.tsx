@@ -14,7 +14,10 @@ import {
   type StackHeaderToolbarMenuElementOptionsAndroid,
   ScrollViewMarker,
 } from 'react-native-screens';
-import type { PlatformIconAndroid } from 'react-native-screens';
+import type {
+  StackHeaderIconAndroid,
+  StackHeaderIconAndroidTinting,
+} from 'react-native-screens';
 import { scenarioDescription } from './scenario-description';
 
 const ID_OPTIONS = ['item-1', 'item-2', 'item-3'] as const;
@@ -22,6 +25,12 @@ type IdOption = (typeof ID_OPTIONS)[number];
 
 const ICON_OPTIONS = ['none', 'imageSource', 'drawableResource'] as const;
 type IconOption = (typeof ICON_OPTIONS)[number];
+
+const TINTING_OPTIONS: StackHeaderIconAndroidTinting[] = [
+  'default',
+  'tinted',
+  'original',
+];
 
 const TINT_COLOR_OPTIONS = [
   'default',
@@ -54,6 +63,7 @@ interface SlotConfig {
   include: boolean;
   id: IdOption;
   icon: IconOption;
+  tinting: StackHeaderIconAndroidTinting;
   showAsAction: ShowAsActionOption;
   tintColorNormal: TintColorOption;
   tintColorPressed: TintColorOption;
@@ -67,6 +77,7 @@ type Slots = [SlotConfig, SlotConfig, SlotConfig];
 const SLOT_DEFAULTS: Omit<SlotConfig, 'id'> = {
   include: true,
   icon: 'imageSource',
+  tinting: 'default',
   showAsAction: 'always',
   tintColorNormal: 'default',
   tintColorPressed: 'default',
@@ -87,17 +98,22 @@ const ITEM_TITLES: Record<IdOption, string> = {
   'item-3': 'Item 3',
 };
 
-function resolveIcon(option: IconOption): PlatformIconAndroid | undefined {
+function resolveIcon(
+  option: IconOption,
+  tinting: StackHeaderIconAndroidTinting,
+): StackHeaderIconAndroid | undefined {
   switch (option) {
     case 'imageSource':
       return {
         type: 'imageSource',
         imageSource: require('@assets/search_black.png'),
+        tinting,
       };
     case 'drawableResource':
       return {
         type: 'drawableResource',
         name: 'sym_call_missed',
+        tinting,
       };
     default:
       return undefined;
@@ -127,7 +143,7 @@ function buildItems(slots: Slots): StackHeaderToolbarMenuItemAndroid[] {
       id: s.id,
       title: ITEM_TITLES[s.id],
       showAsAction: s.showAsAction,
-      icon: resolveIcon(s.icon),
+      icon: resolveIcon(s.icon, s.tinting),
       iconTintColorNormal: resolveTintColor(s.tintColorNormal),
       iconTintColorPressed: resolveTintColor(s.tintColorPressed),
       iconTintColorFocused: resolveTintColor(s.tintColorFocused),
@@ -181,6 +197,8 @@ function MainScreen() {
 
   const [cmdTargetId, setCmdTargetId] = useState<IdOption>('item-1');
   const [cmdIcon, setCmdIcon] = useState<CmdIconOption>('no change');
+  const [cmdTinting, setCmdTinting] =
+    useState<StackHeaderIconAndroidTinting>('default');
   const [cmdTintColorNormal, setCmdTintColorNormal] =
     useState<CmdTintColorOption>('no change');
   const [cmdTintColorPressed, setCmdTintColorPressed] =
@@ -229,7 +247,7 @@ function MainScreen() {
   const sendCommand = useCallback(() => {
     const options: StackHeaderToolbarMenuElementOptionsAndroid = {
       ...(cmdIcon !== 'no change' && {
-        icon: cmdIcon === 'none' ? undefined : resolveIcon(cmdIcon),
+        icon: cmdIcon === 'none' ? undefined : resolveIcon(cmdIcon, cmdTinting),
       }),
       ...(cmdTintColorNormal !== 'no change' && {
         iconTintColorNormal: resolveTintColor(cmdTintColorNormal),
@@ -254,6 +272,7 @@ function MainScreen() {
   }, [
     cmdTargetId,
     cmdIcon,
+    cmdTinting,
     cmdTintColorNormal,
     cmdTintColorPressed,
     cmdTintColorFocused,
@@ -276,6 +295,12 @@ function MainScreen() {
           value={cmdIcon}
           items={CMD_ICON_OPTIONS}
           onValueChange={setCmdIcon}
+        />
+        <SettingsPicker<StackHeaderIconAndroidTinting>
+          label="icon tinting"
+          value={cmdTinting}
+          items={TINTING_OPTIONS}
+          onValueChange={setCmdTinting}
         />
         <SettingsPicker<CmdTintColorOption>
           label="tintColorNormal"
@@ -345,6 +370,12 @@ function SlotControls({ slots, updateSlot }: SlotControlsProps) {
             value={slot.icon}
             items={[...ICON_OPTIONS]}
             onValueChange={v => updateSlot(i, { icon: v })}
+          />
+          <SettingsPicker<StackHeaderIconAndroidTinting>
+            label="tinting"
+            value={slot.tinting}
+            items={TINTING_OPTIONS}
+            onValueChange={v => updateSlot(i, { tinting: v })}
           />
           <SettingsPicker<ShowAsActionOption>
             label="showAsAction"

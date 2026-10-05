@@ -361,3 +361,44 @@ hardware keyboard focus, neither of which Detox supports.
 
 - [ ] Item 2 reappears with its props-configured appearance (`search_black.png`,
       no tint). The command from step 41 did not leak into the re-included slot.
+
+---
+
+### Props — tinting
+
+43. In **Menu Items — Props**, change Slot 1 `tintColorNormal` to `red`.
+
+- [ ] Item 1's icon is tinted red.
+
+44. Change Slot 1 `tinting` to `original`.
+
+- [ ] Item 1's icon shows its own colors (black search icon), NOT red:
+      `original` ignores the configured tint colors.
+
+45. Change Slot 1 `tinting` to `tinted`.
+
+- [ ] Item 1's icon is tinted red again.
+
+46. Change Slot 1 `tinting` to `default` and `tintColorNormal` to `default`.
+
+- [ ] Item 1's icon is untinted (black).
+
+---
+
+### Commands — icon with tinting
+
+47. In **Send Command**, set target id = `item-2`, `tintColorNormal` = `purple`,
+    all others = `no change`. Tap **Send Command**.
+
+- [ ] Item 2's icon is tinted purple.
+
+48. Set target id = `item-2`, `icon` = `imageSource`, `icon tinting` =
+    `original`, `tintColorNormal` = `no change`. Tap **Send Command**.
+
+- [ ] Item 2's icon shows its own colors (black), NOT purple.
+
+49. Set target id = `item-2`, `icon` = `imageSource`, `icon tinting` =
+    `default`. Tap **Send Command**.
+
+- [ ] Item 2's icon is tinted purple again: the new icon carries `default`
+      tinting, so the stored purple tint applies.

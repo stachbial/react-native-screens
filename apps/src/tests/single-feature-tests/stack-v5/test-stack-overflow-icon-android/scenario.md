@@ -149,3 +149,21 @@ icon visible in the normal state.
 - [ ] The overflow button reappears still showing the custom `imageSource` icon
       with tint (the custom icon and its tint are not lost when the overflow
       button is removed and re-added).
+
+---
+
+### Icon tinting
+
+19. Set icon = `imageSource`, tintColorNormal = `red`, tinting = `original`.
+
+- [ ] The overflow button shows the custom image in its own colors (black), NOT
+      red: `original` ignores the configured tint colors.
+
+20. Set tinting = `tinted`.
+
+- [ ] The overflow button image is tinted red.
+
+21. Set tinting = `default`.
+
+- [ ] The overflow button image stays red: `default` tints with the configured
+      colors, like `tinted`.

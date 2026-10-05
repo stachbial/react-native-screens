@@ -11,6 +11,7 @@ import { Colors } from '@apps/shared/styling';
 import {
   type StackHeaderConfigProps,
   type StackHeaderConfigPropsAndroid,
+  type StackHeaderIconAndroidTinting,
   ScrollViewMarker,
 } from 'react-native-screens';
 
@@ -30,12 +31,19 @@ const ICON_OPTIONS: IconOption[] = [
   'drawableResource',
 ];
 
+const TINTING_OPTIONS: StackHeaderIconAndroidTinting[] = [
+  'default',
+  'tinted',
+  'original',
+];
+
 interface Config {
   backButtonHidden: boolean;
   tintColorNormal: TintColorOption;
   tintColorPressed: TintColorOption;
   tintColorFocused: TintColorOption;
   icon: IconOption;
+  tinting: StackHeaderIconAndroidTinting;
 }
 
 const DEFAULT_CONFIG: Config = {
@@ -44,6 +52,7 @@ const DEFAULT_CONFIG: Config = {
   tintColorPressed: 'default',
   tintColorFocused: 'default',
   icon: 'default',
+  tinting: 'default',
 };
 
 const ConfigContext = React.createContext<{
@@ -71,17 +80,20 @@ function resolveTintColor(
 
 function resolveIcon(
   option: IconOption,
+  tinting: StackHeaderIconAndroidTinting,
 ): StackHeaderConfigPropsAndroid['backButtonIcon'] {
   switch (option) {
     case 'imageSource':
       return {
         type: 'imageSource',
         imageSource: require('@assets/backButton.png'),
+        tinting,
       };
     case 'drawableResource':
       return {
         type: 'drawableResource',
         name: 'sym_call_missed',
+        tinting,
       };
     default:
       return undefined;
@@ -96,7 +108,7 @@ function buildHeaderConfig(config: Config): StackHeaderConfigProps {
       backButtonTintColorNormal: resolveTintColor(config.tintColorNormal),
       backButtonTintColorPressed: resolveTintColor(config.tintColorPressed),
       backButtonTintColorFocused: resolveTintColor(config.tintColorFocused),
-      backButtonIcon: resolveIcon(config.icon),
+      backButtonIcon: resolveIcon(config.icon, config.tinting),
     },
   };
 }
@@ -168,6 +180,13 @@ function ConfigControls() {
         value={config.icon}
         onValueChange={v => updateConfig('icon', v)}
         items={ICON_OPTIONS}
+      />
+      <SettingsPicker<StackHeaderIconAndroidTinting>
+        testID="tinting-picker"
+        label="tinting"
+        value={config.tinting}
+        onValueChange={v => updateConfig('tinting', v)}
+        items={TINTING_OPTIONS}
       />
     </>
   );
