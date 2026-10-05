@@ -41,6 +41,49 @@ export type ScrollEdgeEffect = 'automatic' | 'hard' | 'soft' | 'hidden';
 
 export type UserInterfaceStyle = 'unspecified' | 'light' | 'dark';
 
+export type PlatformIconIOSImageRenderingMode =
+  | 'default'
+  | 'template'
+  | 'original';
+
+export type PlatformIconIOSSymbolRenderingMode =
+  | 'default'
+  | 'monochrome'
+  | 'original';
+
+export type PlatformIconAndroidTinting = 'default' | 'tinted' | 'original';
+
+export type WithImageRenderingMode<Icon> = Icon & {
+  /**
+   * @summary How the image is rendered: `template` draws its shape in the
+   * container's icon color, `original` keeps the image's own colors.
+   *
+   * `default`, also used when unset, keeps the container's default.
+   */
+  renderingMode?: PlatformIconIOSImageRenderingMode | undefined;
+};
+
+export type WithSymbolRenderingMode<Icon> = Icon & {
+  /**
+   * @summary How the symbol is rendered: `monochrome` draws it in the
+   * container's icon color, `original` keeps its own colors (Apple's
+   * "multicolor" rendering).
+   *
+   * `default`, also used when unset, keeps the system behavior.
+   */
+  renderingMode?: PlatformIconIOSSymbolRenderingMode | undefined;
+};
+
+export type WithTinting<Icon> = Icon & {
+  /**
+   * @summary How the icon is tinted: `tinted` draws it in the container's icon
+   * color, `original` keeps the icon's own colors.
+   *
+   * `default`, also used when unset, keeps the container's default.
+   */
+  tinting?: PlatformIconAndroidTinting | undefined;
+};
+
 export type PlatformIconShared = {
   type: 'imageSource';
   imageSource: ImageSourcePropType;
