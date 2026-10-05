@@ -31,6 +31,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.swmansion.rnscreens.common.text.TextAppearance
 import com.swmansion.rnscreens.common.text.TextAppearanceDefaults
 import com.swmansion.rnscreens.ext.detachFromCurrentParent
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.stack.header.appbar.StackHeaderAppBarLayout
 import com.swmansion.rnscreens.stack.header.appbar.StackHeaderContentScrimDrawable
 import com.swmansion.rnscreens.stack.header.config.StackHeaderConfigurationProviding
@@ -361,11 +362,15 @@ internal class StackHeaderApplicator(
                 ?: resolveDefaultBackButtonIcon(toolbar)
 
         val tintList =
-            buildTintList(
-                config.backButtonTintColorNormal,
-                config.backButtonTintColorPressed,
-                config.backButtonTintColorFocused,
-            )
+            if (config.backButtonIconTinting == IconTinting.ORIGINAL) {
+                null
+            } else {
+                buildTintList(
+                    config.backButtonTintColorNormal,
+                    config.backButtonTintColorPressed,
+                    config.backButtonTintColorFocused,
+                )
+            }
 
         toolbar.navigationIcon =
             if (tintList != null && baseDrawable != null) {
@@ -389,11 +394,15 @@ internal class StackHeaderApplicator(
                 ?: resolveDefaultOverflowIcon(toolbar)
 
         val tintList =
-            buildTintList(
-                config.overflowIconTintColorNormal,
-                config.overflowIconTintColorPressed,
-                config.overflowIconTintColorFocused,
-            )
+            if (config.overflowIconTinting == IconTinting.ORIGINAL) {
+                null
+            } else {
+                buildTintList(
+                    config.overflowIconTintColorNormal,
+                    config.overflowIconTintColorPressed,
+                    config.overflowIconTintColorFocused,
+                )
+            }
 
         toolbar.overflowIcon =
             if (tintList != null && baseDrawable != null) {

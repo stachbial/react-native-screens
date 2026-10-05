@@ -4,6 +4,7 @@
 
 #import <React/RCTImageLoader.h>
 #import <React/RCTImageSource.h>
+#import "RNSEnums.h"
 
 @interface RNSImageLoadingHelper : NSObject
 
@@ -33,6 +34,8 @@
  * UIKit only resolves them via `imageNamed:`).
  */
 + (nullable UIImage *)symbolImageNamed:(nonnull NSString *)name;
+
++ (nullable UIImage *)image:(nullable UIImage *)image withSymbolRenderingMode:(RNSIconSymbolRenderingMode)renderingMode;
 
 @end
 

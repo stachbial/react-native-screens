@@ -15,6 +15,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.RNSStackHeaderConfigAndroidManagerDelegate
 import com.facebook.react.viewmanagers.RNSStackHeaderConfigAndroidManagerInterface
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.stack.header.subview.StackHeaderSubview
 import com.swmansion.rnscreens.stack.header.toolbar.StackHeaderToolbarMenuMapper
 import com.swmansion.rnscreens.stack.header.toolbar.update.StackHeaderToolbarMenuElementRawUpdate
@@ -488,6 +489,13 @@ internal open class StackHeaderConfigViewManager :
         view.backButtonImageIconUri = value?.getString("uri")
     }
 
+    override fun setBackButtonIconTinting(
+        view: StackHeaderConfig,
+        value: String?,
+    ) {
+        view.backButtonIconTinting = IconTinting.fromString(value)
+    }
+
     override fun setOverflowIconTintColorNormal(
         view: StackHeaderConfig,
         value: Int?,
@@ -521,6 +529,13 @@ internal open class StackHeaderConfigViewManager :
         value: ReadableMap?,
     ) {
         view.overflowIconImageIconUri = value?.getString("uri")
+    }
+
+    override fun setOverflowIconTinting(
+        view: StackHeaderConfig,
+        value: String?,
+    ) {
+        view.overflowIconTinting = IconTinting.fromString(value)
     }
 
     override fun setScrollFlagScroll(

@@ -10,6 +10,10 @@ namespace rnscreens::conversion {
 // copied from FollyConvert.mm
 id RNSConvertFollyDynamicToId(const folly::dynamic &dyn);
 
+RNSIconImageRenderingMode RNSIconImageRenderingModeFromString(NSString *_Nullable renderingMode);
+
+RNSIconSymbolRenderingMode RNSIconSymbolRenderingModeFromString(NSString *_Nullable renderingMode);
+
 #if !TARGET_OS_TV
 UIInterfaceOrientationMask UIInterfaceOrientationMaskFromRNSOrientation(
     RNSOrientation orientation);

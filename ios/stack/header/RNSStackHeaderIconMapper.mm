@@ -1,4 +1,5 @@
 #import "RNSStackHeaderIconMapper.h"
+#import "RNSConversions.h"
 
 @implementation RNSStackHeaderIconMapper
 
@@ -15,15 +16,12 @@
   }
 
   if ([type isEqualToString:@"sfSymbol"]) {
-    return [[RNSStackHeaderIconData alloc] initWithType:RNSStackHeaderIconTypeSfSymbol
-                                           resourceName:dict[@"name"]
-                                             jsonSource:nil];
-  }
-
-  if ([type isEqualToString:@"xcasset"]) {
-    return [[RNSStackHeaderIconData alloc] initWithType:RNSStackHeaderIconTypeXcasset
-                                           resourceName:dict[@"name"]
-                                             jsonSource:nil];
+    return [[RNSStackHeaderIconData alloc]
+               initWithType:RNSStackHeaderIconTypeSfSymbol
+               resourceName:dict[@"name"]
+                 jsonSource:nil
+         imageRenderingMode:RNSIconImageRenderingModeDefault
+        symbolRenderingMode:rnscreens::conversion::RNSIconSymbolRenderingModeFromString(dict[@"renderingMode"])];
   }
 
   if ([type isEqualToString:@"imageSource"]) {
@@ -31,19 +29,12 @@
     if (![source isKindOfClass:[NSDictionary class]]) {
       return nil;
     }
-    return [[RNSStackHeaderIconData alloc] initWithType:RNSStackHeaderIconTypeImageSource
-                                           resourceName:nil
-                                             jsonSource:source];
-  }
-
-  if ([type isEqualToString:@"templateSource"]) {
-    NSDictionary *source = dict[@"templateSource"];
-    if (![source isKindOfClass:[NSDictionary class]]) {
-      return nil;
-    }
-    return [[RNSStackHeaderIconData alloc] initWithType:RNSStackHeaderIconTypeTemplateSource
-                                           resourceName:nil
-                                             jsonSource:source];
+    return [[RNSStackHeaderIconData alloc]
+               initWithType:RNSStackHeaderIconTypeImageSource
+               resourceName:nil
+                 jsonSource:source
+         imageRenderingMode:rnscreens::conversion::RNSIconImageRenderingModeFromString(dict[@"renderingMode"])
+        symbolRenderingMode:RNSIconSymbolRenderingModeDefault];
   }
 
   return nil;

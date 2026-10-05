@@ -11,6 +11,7 @@ import { Colors } from '@apps/shared/styling';
 import {
   type StackHeaderConfigProps,
   type StackHeaderConfigPropsAndroid,
+  type StackHeaderIconAndroidTinting,
   type StackHeaderToolbarMenuElementAndroid,
   ScrollViewMarker,
 } from 'react-native-screens';
@@ -21,8 +22,15 @@ type TintColorOption = (typeof TINT_COLOR_OPTIONS)[number];
 const ICON_OPTIONS = ['default', 'imageSource', 'drawableResource'] as const;
 type IconOption = (typeof ICON_OPTIONS)[number];
 
+const TINTING_OPTIONS: StackHeaderIconAndroidTinting[] = [
+  'default',
+  'tinted',
+  'original',
+];
+
 interface Config {
   icon: IconOption;
+  tinting: StackHeaderIconAndroidTinting;
   tintColorNormal: TintColorOption;
   tintColorPressed: TintColorOption;
   tintColorFocused: TintColorOption;
@@ -31,6 +39,7 @@ interface Config {
 
 const DEFAULT_CONFIG: Config = {
   icon: 'default',
+  tinting: 'default',
   tintColorNormal: 'default',
   tintColorPressed: 'default',
   tintColorFocused: 'default',
@@ -54,17 +63,20 @@ function resolveTintColor(
 
 function resolveIcon(
   option: IconOption,
+  tinting: StackHeaderIconAndroidTinting,
 ): StackHeaderConfigPropsAndroid['overflowIcon'] {
   switch (option) {
     case 'imageSource':
       return {
         type: 'imageSource',
         imageSource: require('@assets/search_black.png'),
+        tinting,
       };
     case 'drawableResource':
       return {
         type: 'drawableResource',
         name: 'sym_call_missed',
+        tinting,
       };
     default:
       return undefined;
@@ -83,7 +95,7 @@ function buildHeaderConfig(config: Config): StackHeaderConfigProps {
   return {
     title: 'Overflow Icon Test',
     android: {
-      overflowIcon: resolveIcon(config.icon),
+      overflowIcon: resolveIcon(config.icon, config.tinting),
       overflowIconTintColorNormal: resolveTintColor(config.tintColorNormal),
       overflowIconTintColorPressed: resolveTintColor(config.tintColorPressed),
       overflowIconTintColorFocused: resolveTintColor(config.tintColorFocused),
@@ -131,6 +143,12 @@ function MainScreen() {
           value={config.icon}
           onValueChange={v => updateConfig('icon', v)}
           items={[...ICON_OPTIONS]}
+        />
+        <SettingsPicker<StackHeaderIconAndroidTinting>
+          label="tinting"
+          value={config.tinting}
+          onValueChange={v => updateConfig('tinting', v)}
+          items={TINTING_OPTIONS}
         />
         <SettingsPicker<TintColorOption>
           label="tintColorNormal"

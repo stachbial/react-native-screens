@@ -5,6 +5,7 @@ import com.facebook.react.bridge.Dynamic
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.ReadableType
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.helpers.parseColor
 import com.swmansion.rnscreens.helpers.readBoolean
 import com.swmansion.rnscreens.helpers.readColor
@@ -83,6 +84,7 @@ internal object StackHeaderToolbarMenuMapper {
             iconTintColorPressed = map.readNullableColorUpdate(context, "iconTintColorPressed"),
             iconTintColorFocused = map.readNullableColorUpdate(context, "iconTintColorFocused"),
             iconTintColorDisabled = map.readNullableColorUpdate(context, "iconTintColorDisabled"),
+            iconTinting = map.readNullableIconTintingUpdate("iconTinting", StackHeaderToolbarMenuItemDefaults.ICON_TINTING),
             menuTitle = map.readNullableStringUpdate("menuTitle"),
         )
 
@@ -204,6 +206,7 @@ internal object StackHeaderToolbarMenuMapper {
                     "iconTintColorDisabled",
                     StackHeaderToolbarMenuItemDefaults.ICON_TINT_COLOR_DISABLED,
                 ),
+            iconTinting = map.readIconTinting("iconTinting", StackHeaderToolbarMenuItemDefaults.ICON_TINTING),
             iconSource = parsePropIconSource(map),
             groupId = map.readOptionalString("groupId"),
             itemType = map.readItemTypeEnum("itemType", StackHeaderToolbarMenuItemDefaults.ITEM_TYPE),
@@ -217,6 +220,14 @@ internal object StackHeaderToolbarMenuMapper {
     // endregion
 
     // region Enum helpers
+
+    private fun ReadableMap.readIconTinting(
+        key: String,
+        default: IconTinting,
+    ): IconTinting {
+        val stringValue = readOptionalString(key) ?: return default
+        return IconTinting.fromString(stringValue)
+    }
 
     private fun ReadableMap.readShowAsActionEnum(
         key: String,
@@ -299,6 +310,16 @@ internal object StackHeaderToolbarMenuMapper {
                 this.getString(key)?.let {
                     toShowAsActionEnum(it)
                 } ?: default
+        }
+
+    private fun ReadableMap.readNullableIconTintingUpdate(
+        key: String,
+        default: IconTinting,
+    ): IconTinting? =
+        when {
+            !this.hasKey(key) -> null
+            this.isNull(key) -> default
+            else -> IconTinting.fromString(this.getString(key))
         }
 
     private fun ReadableMap.readNullableColorUpdate(

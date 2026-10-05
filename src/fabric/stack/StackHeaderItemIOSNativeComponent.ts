@@ -44,28 +44,16 @@ export type HeaderItemPressEvent = Readonly<{}>;
 export type PlatformIconShared = {
   type: 'imageSource';
   imageSource: ImageResolvedAssetSource;
-};
-
-export type PlatformIconIOSTemplate = {
-  type: 'templateSource';
-  templateSource: ImageResolvedAssetSource;
+  renderingMode?: 'default' | 'template' | 'original' | undefined;
 };
 
 export type PlatformIconIOSSfSymbol = {
   type: 'sfSymbol';
   name: string;
+  renderingMode?: 'default' | 'monochrome' | 'original' | undefined;
 };
 
-export type PlatformIconIOSXcasset = {
-  type: 'xcasset';
-  name: string;
-};
-
-export type PlatformIconIOS =
-  | PlatformIconIOSSfSymbol
-  | PlatformIconIOSXcasset
-  | PlatformIconIOSTemplate
-  | PlatformIconShared;
+export type PlatformIconIOS = PlatformIconIOSSfSymbol | PlatformIconShared;
 
 export interface NativeProps extends ViewProps {
   placement?: CT.WithDefault<Placement, 'trailing'>;

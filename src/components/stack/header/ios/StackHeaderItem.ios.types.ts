@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { PlatformIconIOS } from '../../../shared/types';
+import type { StackHeaderIconIOS } from '../StackHeaderIcon.types';
 import type { StackHeaderMenuIOS } from './StackHeaderMenu.ios.types';
 
 export type StackHeaderItemPlacement =
@@ -15,7 +15,7 @@ export type StackHeaderItemProps = {
   identifier?: string | undefined;
   hidesSharedBackground?: boolean | undefined;
   title?: string | undefined;
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
   render?: (() => ReactElement) | undefined;
   menu?: StackHeaderMenuIOS | undefined;
   onPress?: (() => void) | undefined;

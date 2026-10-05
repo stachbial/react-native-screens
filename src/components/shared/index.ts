@@ -1,11 +1,15 @@
 import { Image, type ImageResolvedAssetSource } from 'react-native';
-import type { PlatformIconAndroid } from '../shared/types';
+import type {
+  PlatformIconAndroid,
+  PlatformIconAndroidTinting,
+} from '../shared/types';
 
 export function parseAndroidIconToNativeProps(
   icon: PlatformIconAndroid | undefined,
 ): {
   imageIconResource?: ImageResolvedAssetSource | undefined;
   drawableIconResourceName?: string | undefined;
+  iconTinting?: PlatformIconAndroidTinting | undefined;
 } {
   if (!icon) {
     return {};
@@ -24,10 +28,12 @@ export function parseAndroidIconToNativeProps(
       // ReadableMap. Passing `iconResource` directly will result in crash, because `require` API is returning
       // double as a value.
       imageIconResource: parsedIconResource || undefined,
+      iconTinting: icon.tinting,
     };
   } else if (icon.type === 'drawableResource') {
     return {
       drawableIconResourceName: icon.name,
+      iconTinting: icon.tinting,
     };
   } else {
     throw new Error(

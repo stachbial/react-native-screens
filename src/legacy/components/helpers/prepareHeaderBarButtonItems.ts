@@ -4,10 +4,41 @@ import type {
   HeaderBarButtonItem,
   HeaderBarButtonItemWithMenu,
 } from '../../types';
+import type { PlatformIconIOS } from '../../../components/shared/types';
 
 // Local nominal type so declaration emit doesn't resolve the RN alias down to
 // the non-public `types_generated/.../AssetSourceResolver#ResolvedAssetSource`.
 export interface ResolvedImageAsset extends ImageResolvedAssetSource {}
+
+const prepareIcon = (
+  icon: PlatformIconIOS | undefined,
+): {
+  sfSymbolName?: string | undefined;
+  sfSymbolRenderingMode?: string | undefined;
+  xcassetName?: string | undefined;
+  imageSource?: ResolvedImageAsset | undefined;
+  templateSource?: ResolvedImageAsset | undefined;
+} => {
+  switch (icon?.type) {
+    case 'sfSymbol':
+      return {
+        sfSymbolName: icon.name,
+        sfSymbolRenderingMode: icon.renderingMode,
+      };
+    case 'xcasset':
+      return { xcassetName: icon.name };
+    case 'imageSource': {
+      const source = Image.resolveAssetSource(icon.imageSource);
+      return icon.renderingMode === 'template'
+        ? { templateSource: source }
+        : { imageSource: source };
+    }
+    case 'templateSource':
+      return { templateSource: Image.resolveAssetSource(icon.templateSource) };
+    default:
+      return {};
+  }
+};
 
 const prepareMenu = (
   menu: HeaderBarButtonItemWithMenu['menu'],
@@ -19,35 +50,18 @@ const prepareMenu = (
     ...menu,
     items: menu.items.map((menuItem, menuIndex) => {
       const currentPath = path ? `${path}.${menuIndex}` : `${menuIndex}`;
-      const iconType = menuItem.icon?.type;
-      const sfSymbolName =
-        iconType === 'sfSymbol' ? menuItem.icon?.name : undefined;
-      const xcassetName =
-        iconType === 'xcasset' ? menuItem.icon?.name : undefined;
-
-      let imageSource, templateSource;
-      if (menuItem.icon?.type === 'imageSource') {
-        imageSource = Image.resolveAssetSource(menuItem.icon.imageSource);
-      } else if (menuItem.icon?.type === 'templateSource') {
-        templateSource = Image.resolveAssetSource(menuItem.icon.templateSource);
-      }
+      const icon = prepareIcon(menuItem.icon);
 
       if (menuItem.type === 'submenu') {
         return {
           ...menuItem,
-          sfSymbolName,
-          xcassetName,
-          imageSource,
-          templateSource,
+          ...icon,
           ...prepareMenu(menuItem, index, side, currentPath),
         };
       }
       return {
         ...menuItem,
-        sfSymbolName,
-        xcassetName,
-        imageSource,
-        templateSource,
+        ...icon,
         menuId: `${currentPath}-${index}-${side}`,
       };
     }),
@@ -62,14 +76,6 @@ export const prepareHeaderBarButtonItems = (
     if (item.type === 'spacing') {
       return item;
     }
-    let imageSource: ResolvedImageAsset | undefined,
-      templateSource: ResolvedImageAsset | undefined;
-    if (item.icon?.type === 'imageSource') {
-      imageSource = Image.resolveAssetSource(item.icon.imageSource);
-    } else if (item.icon?.type === 'templateSource') {
-      templateSource = Image.resolveAssetSource(item.icon.templateSource);
-    }
-
     const titleStyle = item.titleStyle
       ? { ...item.titleStyle, color: processColor(item.titleStyle.color) }
       : undefined;
@@ -86,10 +92,7 @@ export const prepareHeaderBarButtonItems = (
       : undefined;
     const processedItem = {
       ...item,
-      imageSource,
-      templateSource,
-      sfSymbolName: item.icon?.type === 'sfSymbol' ? item.icon.name : undefined,
-      xcassetName: item.icon?.type === 'xcasset' ? item.icon.name : undefined,
+      ...prepareIcon(item.icon),
       titleStyle,
       tintColor,
       badge,

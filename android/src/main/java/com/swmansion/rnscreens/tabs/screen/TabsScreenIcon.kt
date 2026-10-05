@@ -3,6 +3,7 @@ package com.swmansion.rnscreens.tabs.screen
 import android.content.Context
 import android.graphics.drawable.Drawable
 import com.swmansion.rnscreens.helpers.IconResolution
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.helpers.NoTintDrawable
 import com.swmansion.rnscreens.helpers.PropIconResolver
 import com.swmansion.rnscreens.helpers.resolveImage
@@ -21,8 +22,8 @@ internal class TabsScreenIcon(
         if (newValue != oldValue) isInvalidated = true
     }
 
-    var tinting: TabsScreenIconTinting by Delegates.observable(
-        TabsScreenIconTinting.DEFAULT,
+    var tinting: IconTinting by Delegates.observable(
+        IconTinting.DEFAULT,
     ) { _, oldValue, newValue ->
         if (newValue != oldValue) isInvalidated = true
     }
@@ -42,7 +43,7 @@ internal class TabsScreenIcon(
 
     // Kept unwrapped so a tint-only change re-wraps without reloading.
     private var rawDrawable: Drawable? = null
-    private var appliedTinting = TabsScreenIconTinting.DEFAULT
+    private var appliedTinting = IconTinting.DEFAULT
 
     fun resolveIfNeeded() {
         if (!isInvalidated) {
@@ -65,7 +66,7 @@ internal class TabsScreenIcon(
         appliedTinting = tinting
         val next =
             rawDrawable?.let {
-                if (tinting == TabsScreenIconTinting.ORIGINAL) NoTintDrawable(it) else it
+                if (tinting == IconTinting.ORIGINAL) NoTintDrawable(it) else it
             }
         if (next !== drawable) {
             drawable = next

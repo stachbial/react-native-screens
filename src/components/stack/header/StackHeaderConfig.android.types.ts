@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import type { ColorValue, TextStyle } from 'react-native';
 import type { StackHeaderSubviewCollapseModeAndroid } from './android/StackHeaderSubview.android.types';
-import type { PlatformIconAndroid } from '../../shared/types';
+import type { StackHeaderIconAndroid } from './StackHeaderIcon.types';
 
 export type StackHeaderTypeAndroid = 'small' | 'medium' | 'large';
 
@@ -187,16 +187,18 @@ export interface StackHeaderToolbarMenuItemBaseAndroid {
    *
    * @description
    * Supported values:
-   * - `{ type: 'imageSource', imageSource }`
+   * - `{ type: 'imageSource', imageSource, tinting? }`
    *   Uses an image from the provided resource.
    *
    *   Remarks: `imageSource` type doesn't support SVGs on Android.
    *   For loading SVGs use `drawableResource` type.
    *
-   * - `{ type: 'drawableResource', name }`
+   * - `{ type: 'drawableResource', name, tinting? }`
    *   Uses a drawable resource with the given name.
    *
    *   Remarks: Requires passing a drawable to resources via Android Studio.
+   *
+   * See `StackHeaderIconAndroidTinting` for the meaning of `tinting`.
    *
    * @remarks
    * The icon will be visible only if the menu element is shown in the
@@ -207,7 +209,7 @@ export interface StackHeaderToolbarMenuItemBaseAndroid {
    *
    * @platform android
    */
-  icon?: PlatformIconAndroid | undefined;
+  icon?: StackHeaderIconAndroid | undefined;
   /**
    * @summary Specifies the tint color to apply to the menu element icon.
    *
@@ -589,20 +591,22 @@ export interface StackHeaderConfigPropsAndroid {
    * When `undefined`, the native back arrow (`homeAsUpIndicator`) is used.
    *
    * Supported values:
-   * - `{ type: 'imageSource', imageSource }`
+   * - `{ type: 'imageSource', imageSource, tinting? }`
    *   Uses an image from the provided resource.
    *
    *   Remarks: `imageSource` type doesn't support SVGs on Android.
    *   For loading SVGs use `drawableResource` type.
    *
-   * - `{ type: 'drawableResource', name }`
+   * - `{ type: 'drawableResource', name, tinting? }`
    *   Uses a drawable resource with the given name.
    *
    *   Remarks: Requires passing a drawable to resources via Android Studio.
    *
+   * See `StackHeaderIconAndroidTinting` for the meaning of `tinting`.
+   *
    * @platform android
    */
-  backButtonIcon?: PlatformIconAndroid | undefined;
+  backButtonIcon?: StackHeaderIconAndroid | undefined;
   /**
    * @summary Custom icon for the overflow menu button (the three-dots button
    * that opens the toolbar menu's overflow popup).
@@ -611,20 +615,22 @@ export interface StackHeaderConfigPropsAndroid {
    * When `undefined`, the Material 3 Expressive default overflow icon is used.
    *
    * Supported values:
-   * - `{ type: 'imageSource', imageSource }`
+   * - `{ type: 'imageSource', imageSource, tinting? }`
    *   Uses an image from the provided resource.
    *
    *   Remarks: `imageSource` type doesn't support SVGs on Android.
    *   For loading SVGs use `drawableResource` type.
    *
-   * - `{ type: 'drawableResource', name }`
+   * - `{ type: 'drawableResource', name, tinting? }`
    *   Uses a drawable resource with the given name.
    *
    *   Remarks: Requires passing a drawable to resources via Android Studio.
    *
+   * See `StackHeaderIconAndroidTinting` for the meaning of `tinting`.
+   *
    * @platform android
    */
-  overflowIcon?: PlatformIconAndroid | undefined;
+  overflowIcon?: StackHeaderIconAndroid | undefined;
   /**
    * @summary Tint color applied to the overflow menu icon in its normal state.
    *

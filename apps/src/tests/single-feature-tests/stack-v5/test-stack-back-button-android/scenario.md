@@ -187,3 +187,22 @@ adapts to color scheme change.
 
 - [ ] Pushed screen appears with the `imageSource` icon and purple
       tint already applied.
+
+---
+
+### Icon tinting
+
+24. On the pushed screen (icon = `imageSource`, tintColorNormal = `purple`), set
+    tinting = `original`.
+
+- [ ] The back button shows the custom image in its own colors, NOT purple:
+      `original` ignores the configured tint colors.
+
+25. Set tinting = `tinted`.
+
+- [ ] The back button image is tinted purple again.
+
+26. Set tinting = `default`.
+
+- [ ] The back button image stays purple: `default` tints with the configured
+      colors, like `tinted`.

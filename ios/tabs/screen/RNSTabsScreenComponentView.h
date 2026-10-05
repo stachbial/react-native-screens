@@ -47,15 +47,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) RNSTabsIconType iconType;
 
-@property (nonatomic, readonly) RNSTabsIconImageRenderingMode iconImageRenderingMode;
-@property (nonatomic, readonly) RNSTabsIconSymbolRenderingMode iconSymbolRenderingMode;
+@property (nonatomic, readonly) RNSIconImageRenderingMode iconImageRenderingMode;
+@property (nonatomic, readonly) RNSIconSymbolRenderingMode iconSymbolRenderingMode;
 #if defined(__cplusplus)
 @property (nonatomic, strong, readonly, nullable) RCTImageSource *iconImageSource;
 #endif // defined(__cplusplus)
 @property (nonatomic, strong, readonly, nullable) NSString *iconResourceName;
 
-@property (nonatomic, readonly) RNSTabsIconImageRenderingMode selectedIconImageRenderingMode;
-@property (nonatomic, readonly) RNSTabsIconSymbolRenderingMode selectedIconSymbolRenderingMode;
+@property (nonatomic, readonly) RNSIconImageRenderingMode selectedIconImageRenderingMode;
+@property (nonatomic, readonly) RNSIconSymbolRenderingMode selectedIconSymbolRenderingMode;
 #if defined(__cplusplus)
 @property (nonatomic, strong, readonly, nullable) RCTImageSource *selectedIconImageSource;
 #endif // defined(__cplusplus)

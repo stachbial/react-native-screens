@@ -68,6 +68,18 @@
   return image;
 }
 
++ (nullable UIImage *)image:(nullable UIImage *)image withSymbolRenderingMode:(RNSIconSymbolRenderingMode)renderingMode
+{
+  switch (renderingMode) {
+    case RNSIconSymbolRenderingModeMonochrome:
+      return [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    case RNSIconSymbolRenderingModeOriginal:
+      return [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    case RNSIconSymbolRenderingModeDefault:
+      return image;
+  }
+}
+
 + (nullable UIImage *)handleRenderingModeForImage:(nullable UIImage *)image isTemplate:(BOOL)isTemplate
 {
   if (isTemplate) {

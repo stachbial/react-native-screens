@@ -8,6 +8,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.ViewManagerDelegate
 import com.facebook.react.viewmanagers.RNSTabsScreenAndroidManagerDelegate
 import com.facebook.react.viewmanagers.RNSTabsScreenAndroidManagerInterface
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.helpers.makeEventRegistrationInfo
 import com.swmansion.rnscreens.helpers.readOptionalBoolean
 import com.swmansion.rnscreens.helpers.readOptionalColor
@@ -143,14 +144,14 @@ class TabsScreenViewManager :
         view: TabsScreen,
         value: String?,
     ) {
-        view.icon.tinting = TabsScreenIconTinting.fromString(value)
+        view.icon.tinting = IconTinting.fromString(value)
     }
 
     override fun setSelectedIconTinting(
         view: TabsScreen,
         value: String?,
     ) {
-        view.selectedIcon.tinting = TabsScreenIconTinting.fromString(value)
+        view.selectedIcon.tinting = IconTinting.fromString(value)
     }
 
     override fun setIconSize(

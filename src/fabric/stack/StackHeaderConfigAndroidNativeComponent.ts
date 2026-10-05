@@ -39,6 +39,8 @@ type StackHeaderToolbarMenuItemShowAsActionAndroid =
 
 type StackHeaderToolbarMenuItemTypeAndroid = 'action' | 'toggle' | 'automatic';
 
+export type IconTinting = 'default' | 'tinted' | 'original';
+
 export interface StackHeaderToolbarMenuItemBaseAndroid {
   id: string;
   title?: string | undefined;
@@ -57,6 +59,7 @@ export interface StackHeaderToolbarMenuItemBaseAndroid {
   iconTintColorPressed?: ProcessedColorValue | null | undefined;
   iconTintColorFocused?: ProcessedColorValue | null | undefined;
   iconTintColorDisabled?: ProcessedColorValue | null | undefined;
+  iconTinting?: IconTinting | null | undefined;
 }
 
 type StackHeaderToolbarMenuItemAndroid =
@@ -164,12 +167,14 @@ export interface NativeProps extends ViewProps {
   backButtonTintColorFocused?: ColorValue | undefined;
   backButtonDrawableIconResourceName?: string | undefined;
   backButtonImageIconResource?: ImageSource | undefined;
+  backButtonIconTinting?: CT.WithDefault<IconTinting, 'default'>;
 
   overflowIconTintColorNormal?: ColorValue | undefined;
   overflowIconTintColorPressed?: ColorValue | undefined;
   overflowIconTintColorFocused?: ColorValue | undefined;
   overflowIconDrawableIconResourceName?: string | undefined;
   overflowIconImageIconResource?: ImageSource | undefined;
+  overflowIconTinting?: CT.WithDefault<IconTinting, 'default'>;
 
   scrollFlagScroll?: CT.WithDefault<boolean, false>;
   scrollFlagEnterAlways?: CT.WithDefault<boolean, false>;

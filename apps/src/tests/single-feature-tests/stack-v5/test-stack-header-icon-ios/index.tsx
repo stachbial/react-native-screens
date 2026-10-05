@@ -9,32 +9,45 @@ import { Button, ScrollView, Text, View, StyleSheet } from 'react-native';
 import { scenarioDescription } from './scenario-description';
 import { ToastProvider, useToast } from '@apps/shared';
 import { Colors } from '@apps/shared/styling';
-import { type PlatformIconIOS } from 'react-native-screens';
+import { type StackHeaderIconIOS } from 'react-native-screens';
 
-type IconVariant = 'sfSymbol' | 'xcasset' | 'imageSource' | 'templateSource';
+type IconVariant =
+  | 'sfSymbol'
+  | 'customSymbol'
+  | 'imageSource'
+  | 'templateImage'
+  | 'originalSymbol';
 
 const ICON_VARIANTS: IconVariant[] = [
   'sfSymbol',
-  'xcasset',
+  'customSymbol',
   'imageSource',
-  'templateSource',
+  'templateImage',
+  'originalSymbol',
 ];
 
-function iconForVariant(variant: IconVariant): PlatformIconIOS {
+function iconForVariant(variant: IconVariant): StackHeaderIconIOS {
   switch (variant) {
     case 'sfSymbol':
       return { type: 'sfSymbol', name: 'star.fill' };
-    case 'xcasset':
-      return { type: 'xcasset', name: 'custom-icon-fill' };
+    case 'customSymbol':
+      return { type: 'sfSymbol', name: 'nano.swm' };
     case 'imageSource':
       return {
         type: 'imageSource',
         imageSource: require('@assets/search_black.png'),
       };
-    case 'templateSource':
+    case 'templateImage':
       return {
-        type: 'templateSource',
-        templateSource: require('@assets/variableIcons/icon.png'),
+        type: 'imageSource',
+        imageSource: require('@assets/search_white.png'),
+        renderingMode: 'template',
+      };
+    case 'originalSymbol':
+      return {
+        type: 'sfSymbol',
+        name: 'heart.fill',
+        renderingMode: 'original',
       };
   }
 }

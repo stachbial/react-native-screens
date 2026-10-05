@@ -20,7 +20,7 @@ import type {
   StackHeaderInlineItemIOS,
   StackHeaderSpacerItemIOS,
 } from 'react-native-screens/components/stack/header';
-import type { PlatformIconIOS } from 'react-native-screens';
+import type { StackHeaderIconIOS } from 'react-native-screens';
 
 type ItemId = 'alpha' | 'bravo' | 'charlie';
 
@@ -36,7 +36,7 @@ const COLOR_CYCLES: Record<ItemId, string[]> = {
   charlie: [Colors.BlueLight100, Colors.PurpleLight100, Colors.GreenLight100],
 };
 
-function iconForItem(id: ItemId, screenIndex: number): PlatformIconIOS {
+function iconForItem(id: ItemId, screenIndex: number): StackHeaderIconIOS {
   const cycle = SYMBOL_CYCLES[id];
   return { type: 'sfSymbol', name: cycle[screenIndex % cycle.length]! };
 }

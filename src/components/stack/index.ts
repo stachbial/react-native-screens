@@ -22,6 +22,8 @@ export type {
   StackHeaderConfigProps,
   StackHeaderConfigRef,
   // Android
+  StackHeaderIconAndroid,
+  StackHeaderIconAndroidTinting,
   StackHeaderTypeAndroid,
   StackHeaderTitleHorizontalGravityAndroid,
   StackHeaderTitleVerticalGravityAndroid,
@@ -43,6 +45,9 @@ export type {
   StackHeaderToolbarMenuItemTypeAndroid,
   // iOS
   StackHeaderBackButtonDisplayModeIOS,
+  StackHeaderIconIOS,
+  StackHeaderIconIOSImageRenderingMode,
+  StackHeaderIconIOSSymbolRenderingMode,
   StackHeaderConfigPropsIOS,
   StackHeaderAppearanceIOS,
   StackHeaderInlineItemIOS,

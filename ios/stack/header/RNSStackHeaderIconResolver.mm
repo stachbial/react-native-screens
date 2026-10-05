@@ -1,5 +1,6 @@
 #import "RNSStackHeaderIconResolver.h"
 #import <React/RCTLog.h>
+#import "RNSImageLoadingHelper.h"
 
 @implementation RNSStackHeaderIconResolver
 
@@ -18,30 +19,23 @@
 
   switch (iconData.iconType) {
     case RNSStackHeaderIconTypeSfSymbol: {
-      UIImage *image = [UIImage systemImageNamed:iconData.resourceName];
+      UIImage *image =
+          iconData.resourceName != nil ? [RNSImageLoadingHelper symbolImageNamed:iconData.resourceName] : nil;
       if (image == nil && iconData.resourceName != nil) {
         RCTLogWarn(@"[RNScreens] Failed to load SF Symbol \"%@\" for header icon", iconData.resourceName);
       }
+      image = [RNSImageLoadingHelper image:image withSymbolRenderingMode:iconData.symbolRenderingMode];
       iconData.resolvedImage = image;
       return image;
     }
-    case RNSStackHeaderIconTypeXcasset: {
-      UIImage *image = [UIImage imageNamed:iconData.resourceName];
-      if (image == nil && iconData.resourceName != nil) {
-        RCTLogWarn(@"[RNScreens] Failed to load xcasset \"%@\" for header icon", iconData.resourceName);
-      }
-      iconData.resolvedImage = image;
-      return image;
-    }
-    case RNSStackHeaderIconTypeImageSource:
-    case RNSStackHeaderIconTypeTemplateSource: {
+    case RNSStackHeaderIconTypeImageSource: {
       if (imageLoader == nil || iconData.jsonSource == nil) {
         return nil;
       }
       // Weak ref to iconData to avoid retaining it if the item is removed before load completes
       __weak RNSStackHeaderIconData *weakIconData = iconData;
       [imageLoader loadImageFromJsonSource:iconData.jsonSource
-                                asTemplate:iconData.iconType == RNSStackHeaderIconTypeTemplateSource
+                                asTemplate:iconData.imageRenderingMode == RNSIconImageRenderingModeTemplate
                     withCompletionCallback:^(UIImage *_Nullable image) {
                       weakIconData.resolvedImage = image;
                       if (completionBlock) {

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import type { TextStyle } from 'react-native';
-import type { PlatformIconIOS } from '../../shared/types';
+import type { StackHeaderIconIOS } from './StackHeaderIcon.types';
 import type { StackHeaderMenuIOS } from './ios/StackHeaderMenu.ios.types';
 
 /**
@@ -23,7 +23,7 @@ export interface StackHeaderMenuItemOptionsIOS {
    *
    * @platform ios
    */
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
   /**
    * @summary Sets the toggle state of the menu item.
    *
@@ -57,7 +57,7 @@ export interface StackHeaderMenuOptionsIOS {
    *
    * @platform ios
    */
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
 }
 
 export interface StackHeaderBaseItemIOS {
@@ -77,13 +77,15 @@ export interface StackHeaderBaseItemIOS {
    * @summary Icon displayed for the header item.
    *
    * @description
-   * Supports SF Symbols, xcassets, and image sources. For async image sources,
+   * Supports SF Symbols and image sources, each with an optional
+   * `renderingMode` (see `StackHeaderIconIOSSymbolRenderingMode` and
+   * `StackHeaderIconIOSImageRenderingMode`). For async image sources,
    * the item renders without an icon first and updates when loaded.
    * Ignored when custom view ({@link StackHeaderInlineCustomItemIOS.render | render}) is set.
    *
    * @platform iOS
    */
-  icon?: PlatformIconIOS | undefined;
+  icon?: StackHeaderIconIOS | undefined;
 }
 
 export interface SupportsMenuIOS {

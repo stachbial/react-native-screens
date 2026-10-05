@@ -8,6 +8,7 @@ import com.facebook.react.views.view.ReactViewGroup
 import com.swmansion.rnscreens.common.ShadowStateProxy
 import com.swmansion.rnscreens.common.text.ReactTextAppearance
 import com.swmansion.rnscreens.helpers.IconResolution
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.helpers.PropIconResolver
 import com.swmansion.rnscreens.helpers.resolveImage
 import com.swmansion.rnscreens.stack.header.subview.OnStackHeaderSubviewChangeListener
@@ -79,6 +80,12 @@ internal class StackHeaderConfig(
     override var backButtonIcon: Drawable? by invalidatingProperty(null, StackHeaderInvalidationFlags.BACK_BUTTON)
         internal set
 
+    override var backButtonIconTinting: IconTinting by invalidatingProperty(
+        IconTinting.DEFAULT,
+        StackHeaderInvalidationFlags.BACK_BUTTON,
+    )
+        internal set
+
     override var overflowIconTintColorNormal: Int? by invalidatingProperty(null, StackHeaderInvalidationFlags.OVERFLOW_ICON)
         internal set
 
@@ -89,6 +96,12 @@ internal class StackHeaderConfig(
         internal set
 
     override var overflowIcon: Drawable? by invalidatingProperty(null, StackHeaderInvalidationFlags.OVERFLOW_ICON)
+        internal set
+
+    override var overflowIconTinting: IconTinting by invalidatingProperty(
+        IconTinting.DEFAULT,
+        StackHeaderInvalidationFlags.OVERFLOW_ICON,
+    )
         internal set
 
     override var scrollFlagScroll: Boolean by invalidatingProperty(false, StackHeaderInvalidationFlags.SCROLL_FLAGS)

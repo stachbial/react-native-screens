@@ -1,6 +1,7 @@
 package com.swmansion.rnscreens.stack.header.toolbar.update
 
 import android.graphics.drawable.Drawable
+import com.swmansion.rnscreens.helpers.IconTinting
 import com.swmansion.rnscreens.stack.header.toolbar.model.StackHeaderToolbarMenuElementConfig
 import com.swmansion.rnscreens.stack.header.toolbar.model.StackHeaderToolbarMenuItemShowAsAction
 
@@ -22,6 +23,7 @@ internal data class StackHeaderToolbarMenuElementOptions(
     val iconTintColorPressed: StackHeaderToolbarFieldUpdate<Int>? = null,
     val iconTintColorFocused: StackHeaderToolbarFieldUpdate<Int>? = null,
     val iconTintColorDisabled: StackHeaderToolbarFieldUpdate<Int>? = null,
+    val iconTinting: IconTinting? = null,
     val menuTitle: StackHeaderToolbarFieldUpdate<String>? = null,
 ) {
     val requiresIconTintColorUpdate: Boolean
@@ -29,7 +31,8 @@ internal data class StackHeaderToolbarMenuElementOptions(
             iconTintColorNormal != null ||
                 iconTintColorPressed != null ||
                 iconTintColorFocused != null ||
-                iconTintColorDisabled != null
+                iconTintColorDisabled != null ||
+                iconTinting != null
 
     val isEmpty: Boolean
         get() = this == DEFAULT
@@ -49,6 +52,7 @@ internal data class StackHeaderToolbarMenuElementOptions(
             iconTintColorPressed = newer.iconTintColorPressed ?: iconTintColorPressed,
             iconTintColorFocused = newer.iconTintColorFocused ?: iconTintColorFocused,
             iconTintColorDisabled = newer.iconTintColorDisabled ?: iconTintColorDisabled,
+            iconTinting = newer.iconTinting ?: iconTinting,
             menuTitle = newer.menuTitle ?: menuTitle,
         )
 
@@ -78,6 +82,7 @@ internal fun StackHeaderToolbarMenuElementConfig.toOptions() =
         iconTintColorPressed = StackHeaderToolbarFieldUpdate.from(item.iconTintColorPressed),
         iconTintColorFocused = StackHeaderToolbarFieldUpdate.from(item.iconTintColorFocused),
         iconTintColorDisabled = StackHeaderToolbarFieldUpdate.from(item.iconTintColorDisabled),
+        iconTinting = item.iconTinting,
         menuTitle =
             (this as? StackHeaderToolbarMenuElementConfig.Submenu)
                 ?.let { StackHeaderToolbarFieldUpdate.from(it.menuTitle) },

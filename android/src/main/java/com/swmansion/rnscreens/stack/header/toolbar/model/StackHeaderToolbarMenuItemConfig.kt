@@ -1,5 +1,7 @@
 package com.swmansion.rnscreens.stack.header.toolbar.model
 
+import com.swmansion.rnscreens.helpers.IconTinting
+
 internal data class StackHeaderToolbarMenuItemConfig(
     val id: String,
     val title: String?,
@@ -13,6 +15,7 @@ internal data class StackHeaderToolbarMenuItemConfig(
     val iconTintColorPressed: Int?,
     val iconTintColorFocused: Int?,
     val iconTintColorDisabled: Int?,
+    val iconTinting: IconTinting,
     val iconSource: StackHeaderToolbarMenuItemIconSource,
     val groupId: String?,
     val itemType: StackHeaderToolbarMenuItemType,

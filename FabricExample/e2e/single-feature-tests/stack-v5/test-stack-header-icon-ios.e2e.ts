@@ -12,14 +12,25 @@ import { describeIfIOS } from '@e2e/framework/platform';
 // Toggle 1, Toggle 2, Toggle 3 and Submenu.
 const MENU_ROW_COUNT = 4;
 
-// `imageSource` and `templateSource` ids are the bundled paths of the `require`d
+// `imageSource` and `templateImage` ids are the bundled paths of the `require`d
 // asset files — renaming or moving those assets requires updating them here.
 const ICON_IDS = {
   sfSymbol: 'star.fill',
-  xcasset: 'custom-icon-fill',
+  customSymbol: 'nano.swm',
   imageSource: 'assets/_apps/assets/search_black.png',
-  templateSource: 'assets/_apps/assets/variableIcons/icon@3x.png',
+  templateImage: 'assets/_apps/assets/search_white.png',
+  originalSymbol: 'heart.fill',
 } as const;
+
+type IconVariant = keyof typeof ICON_IDS;
+
+const CYCLE: IconVariant[] = [
+  'customSymbol',
+  'imageSource',
+  'templateImage',
+  'originalSymbol',
+  'sfSymbol',
+];
 
 // The icon of a single menu row, addressed by its icon id and its position in
 // the menu.
@@ -66,34 +77,17 @@ describeIfIOS('Stack Header Icon (iOS)', () => {
   });
 
   describe('cycling the bar button item icon', () => {
-    it('should cycle the item icon through xcasset, imageSource, templateSource and back to sfSymbol', async () => {
-      await element(by.id('cycle-item-icon-button')).tap();
-      await expect(
-        element(by.id('current-item-icon').and(by.text('xcasset'))),
-      ).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.sfSymbol)).not.toExist();
-      await expect(barButtonIcon(ICON_IDS.xcasset)).toBeVisible();
-
-      await element(by.id('cycle-item-icon-button')).tap();
-      await expect(
-        element(by.id('current-item-icon').and(by.text('imageSource'))),
-      ).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.imageSource)).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.xcasset)).not.toExist();
-
-      await element(by.id('cycle-item-icon-button')).tap();
-      await expect(
-        element(by.id('current-item-icon').and(by.text('templateSource'))),
-      ).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.templateSource)).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.imageSource)).not.toExist();
-
-      await element(by.id('cycle-item-icon-button')).tap();
-      await expect(
-        element(by.id('current-item-icon').and(by.text('sfSymbol'))),
-      ).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.sfSymbol)).toBeVisible();
-      await expect(barButtonIcon(ICON_IDS.templateSource)).not.toExist();
+    it('should cycle the item icon through a custom symbol, imageSource, a template image, an original symbol and back to sfSymbol', async () => {
+      let previous: IconVariant = 'sfSymbol';
+      for (const variant of CYCLE) {
+        await element(by.id('cycle-item-icon-button')).tap();
+        await expect(
+          element(by.id('current-item-icon').and(by.text(variant))),
+        ).toBeVisible();
+        await expect(barButtonIcon(ICON_IDS[variant])).toBeVisible();
+        await expect(barButtonIcon(ICON_IDS[previous])).not.toExist();
+        previous = variant;
+      }
     });
   });
 
@@ -120,23 +114,15 @@ describeIfIOS('Stack Header Icon (iOS)', () => {
     });
 
     it('should cycle the menu icon variant when repeatedly tapping "Cycle icons" inside the menu', async () => {
-      await element(by.text('Cycle icons (sfSymbol)')).tap();
-      await expect(element(by.text('Cycle icons (xcasset)'))).toBeVisible();
-      await expectAllMenuRowIconsToBeVisible(ICON_IDS.xcasset);
-
-      await element(by.text('Cycle icons (xcasset)')).tap();
-      await expect(element(by.text('Cycle icons (imageSource)'))).toBeVisible();
-      await expectAllMenuRowIconsToBeVisible(ICON_IDS.imageSource);
-
-      await element(by.text('Cycle icons (imageSource)')).tap();
-      await expect(
-        element(by.text('Cycle icons (templateSource)')),
-      ).toBeVisible();
-      await expectAllMenuRowIconsToBeVisible(ICON_IDS.templateSource);
-
-      await element(by.text('Cycle icons (templateSource)')).tap();
-      await expect(element(by.text('Cycle icons (sfSymbol)'))).toBeVisible();
-      await expectAllMenuRowIconsToBeVisible(ICON_IDS.sfSymbol);
+      let previous: IconVariant = 'sfSymbol';
+      for (const variant of CYCLE) {
+        await element(by.text(`Cycle icons (${previous})`)).tap();
+        await expect(
+          element(by.text(`Cycle icons (${variant})`)),
+        ).toBeVisible();
+        await expectAllMenuRowIconsToBeVisible(ICON_IDS[variant]);
+        previous = variant;
+      }
     });
   });
 });

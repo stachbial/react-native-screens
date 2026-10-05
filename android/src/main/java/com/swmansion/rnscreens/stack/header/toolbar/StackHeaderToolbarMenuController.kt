@@ -424,6 +424,7 @@ internal class StackHeaderToolbarMenuController(
                     iconTintColorPressed = effective.iconTintColorPressed,
                     iconTintColorFocused = effective.iconTintColorFocused,
                     iconTintColorDisabled = effective.iconTintColorDisabled,
+                    iconTinting = effective.iconTinting,
                 )
             if (delta.icon != null) {
                 resolved = resolved.copy(showAsAction = effective.showAsAction)

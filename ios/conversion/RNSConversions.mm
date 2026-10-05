@@ -3,6 +3,28 @@
 
 namespace rnscreens::conversion {
 
+RNSIconImageRenderingMode RNSIconImageRenderingModeFromString(NSString *_Nullable renderingMode)
+{
+  if ([renderingMode isEqualToString:@"template"]) {
+    return RNSIconImageRenderingModeTemplate;
+  }
+  if ([renderingMode isEqualToString:@"original"]) {
+    return RNSIconImageRenderingModeOriginal;
+  }
+  return RNSIconImageRenderingModeDefault;
+}
+
+RNSIconSymbolRenderingMode RNSIconSymbolRenderingModeFromString(NSString *_Nullable renderingMode)
+{
+  if ([renderingMode isEqualToString:@"monochrome"]) {
+    return RNSIconSymbolRenderingModeMonochrome;
+  }
+  if ([renderingMode isEqualToString:@"original"]) {
+    return RNSIconSymbolRenderingModeOriginal;
+  }
+  return RNSIconSymbolRenderingModeDefault;
+}
+
 #if !TARGET_OS_TV
 UIInterfaceOrientationMask UIInterfaceOrientationMaskFromRNSOrientation(RNSOrientation orientation)
 {
